@@ -14,7 +14,8 @@ const app = express();
 app.engine('html', consolidate.nunjucks);
 app.set('views', './views');
 
-app.use(bodyparser.urlencoded());
+// app.use(bodyparser.urlencoded());
+app.use(bodyparser.urlencoded({extended: true}));
 app.use(cookieparser('secret-cookie'));
 app.use(session({ resave: false, saveUninitialized: false, secret: 'secret-cookie' }));
 app.use(flash());

@@ -1,13 +1,13 @@
 # Lab Exercise 4: Improving the Dummy Bank
 
-(members: )
+(members: Ming & Moo )
 
 There are several things in the **Dummy Bank** application which can be improved. Your goal is to complete the following checklist of tasks that need to be implemented/fixed/refactored.
 
 
 Tasks:
 
-1. **Eliminate deprecation warnings when running the server**
+[x]1. **Eliminate deprecation warnings when running the server**
 1. **Implement deposit functionality**
    - In the profile page, add a form wherein the user can deposit an amount to his/her account.
 1. **Implement withdraw functionality**
