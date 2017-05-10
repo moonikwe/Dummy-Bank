@@ -22,9 +22,25 @@
       				<label for="amount">Transfer Amount</label>
       				<input type="number" name="amount" id="amount">
       			</div>
+            <button>Transfer</button>
 
-              <button>Transfer</button>
           </form>
+          <form action="/deposit" method="post">
+            <div>
+              <label for="deposit">Deposit</label>
+              <input type="number" name="deposit" id="deposit">
+            </div>
+            <button>Deposit</button>
+          </form>
+          
+          <form action="/withdraw" method="post">
+            <div>
+              <label for="withdraw">Withdraw</label>
+              <input type="number" name="withdraw" id="withdraw">
+            </div>
+            <button>Withdraw</button>
+          </form>
+
         </section>
     </body>
 </html>

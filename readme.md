@@ -8,9 +8,9 @@ There are several things in the **Dummy Bank** application which can be improved
 Tasks:
 
 [x]1. **Eliminate deprecation warnings when running the server**
-1. **Implement deposit functionality**
+[x]1. **Implement deposit functionality**
    - In the profile page, add a form wherein the user can deposit an amount to his/her account.
-1. **Implement withdraw functionality**
+[x]1. **Implement withdraw functionality**
    - In the profile page, add a form wherein the user can withdraw an amount to his/her account.
 [x]1. **Create `Account` instance on sign up**
    - Currently, when signing up only a `User` instance is created. Modify the signup workflow to also create an `Account` instance for that user after the user signs up.

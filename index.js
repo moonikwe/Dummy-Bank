@@ -63,7 +63,41 @@ app.post('/transfer', requireSignedIn, function(req, res) {
 		});
 	});
 });
+app.post('/deposit', requireSignedIn, function(req, res){
+	const deposit = parseInt(req.body.deposit, 10);
+	const email = req.session.currentUser;
+	User.findOne({where: {email: email}}).then(function(owner){
+		Account.findOne({where: {user_id: owner.id}}).then(function(ownerAccount){
+			database.transaction(function(t){
+				return ownerAccount.update({
+					balance: ownerAccount.balance + deposit
+				}, { transaction: t });
+			}).then(function() {
+				req.flash('statusMessage', 'Deposit successful ');
+				res.redirect('/profile');
+			});
+		});
+	});
 
+});
+app.post('/withdraw', requireSignedIn, function(req, res){
+	const withdraw = parseInt(req.body.withdraw, 10);
+	const email = req.session.currentUser;
+	User.findOne({where: {email: email}}).then(function(owner){
+		Account.findOne({where: {user_id: owner.id}}).then(function(ownerAccount){
+			database.transaction(function(t){
+				if(ownerAccount.balance >= withdraw){
+					return ownerAccount.update({
+						balance: ownerAccount.balance - withdraw
+					}, { transaction: t });
+				}
+			}).then(function(){
+				req.flash('statusMessage', 'Withdraw successful');
+				res.redirect('/profile');
+			});
+		});
+	});
+});
 app.get('/auth/twitter', passport.authenticate('twitter'));
 app.get('/auth/twitter/callback',
     passport.authenticate('twitter', {
