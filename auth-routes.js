@@ -7,11 +7,11 @@ const database = require('./database');
 
 router.post('/signup', function(req, res) {
 	const email = req.body.email;
-  const password = req.body.password;
-  const confirmation = req.body.confirmation;
+	const password = req.body.password;
+	const confirmation = req.body.confirmation;
 
 	User.findOne({ where: { email: email } }).then(function(user) {
-		
+
         if (user !== null) {
             req.flash('signUpMessage', 'Email is already in use.');
             return res.redirect('/');
@@ -24,26 +24,26 @@ router.post('/signup', function(req, res) {
         const salt = bcrypt.genSaltSync();
         const hashedPassword = bcrypt.hashSync(password, salt);
 
-				database.transaction( function (t) {
-				return User.create({
-				    email: email,
-				    password: hashedPassword,
-				    salt: salt
-				}, {
-					transaction: t
-				}).then(function () {
-					 User.findOne({ where: { email: email } }).then(function(user) {
-							 if(user !== null){
-									 Account.create({
-											user_id: user.id
-									 }).then(function() {
-									    req.flash('signUpMessage', 'Signed up successfully!');
-									    return res.redirect('/');
-									 });
-							 }
-					 });
-				 });
+		database.transaction( function (t) {
+			return User.create({
+			    email: email,
+			    password: hashedPassword,
+			    salt: salt
+			}, {
+				transaction: t
+			}).then(function () {
+				User.findOne({ where: { email: email } }).then(function(user) {
+					if(user !== null){
+						Account.create({
+							user_id: user.id
+						}).then(function() {
+						  req.flash('signUpMessage', 'Signed up successfully!');
+						  return res.redirect('/');
+						});
+					}
+				});
 			 });
+		 });
     });
 });
 
