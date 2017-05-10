@@ -11,18 +11,20 @@
 
         <h1>{{ user.email }}</h1>
         <a href="/signout">Sign Out</a>
+        <section>
+          <form action="/transfer" method="post">
+      			<div>
+      				<label for="recipient">Transfer To</label>
+      				<input type="text" name="recipient" id="recipient">
+      			</div>
 
-        <form action="/transfer" method="post">
-			<div>
-				<label for="recipient">Transfer To</label>
-				<input type="text" name="recipient" id="recipient">
-			</div>
-			<div>
-				<label for="amount">Transfer Amount</label>
-				<input type="number" name="amount" id="amount">
-			</div>
+      			<div>
+      				<label for="amount">Transfer Amount</label>
+      				<input type="number" name="amount" id="amount">
+      			</div>
 
-            <button>Transfer</button>
-        </form>
+              <button>Transfer</button>
+          </form>
+        </section>
     </body>
 </html>
