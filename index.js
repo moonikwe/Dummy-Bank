@@ -10,6 +10,7 @@ const User = require('./models').User;
 const Account = require('./models').Account;
 const routes ='./routes/auth-routes';
 const twitter = './routes/twitter';
+const facebook = './routes/facebook';
 const app = express();
 
 app.engine('html', consolidate.nunjucks);
@@ -24,6 +25,7 @@ app.use(passport.initialize());
 app.use('/static', express.static('./static'));
 app.use(require(routes));
 app.use(require(twitter));
+app.use(require(facebook));
 app.get('/', function(req, res) {
 	res.render('index.html');
 });
