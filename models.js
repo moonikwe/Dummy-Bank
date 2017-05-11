@@ -19,12 +19,7 @@ const User = database.define('users', {
 	}
 }, {
 	timestamps: true
-},
-	name: {
-		type: Sequelize.STRING,
-		allowNull: true
-	}
-);
+});
 
 const Account = database.define('accounts', {
     id: {
