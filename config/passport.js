@@ -21,8 +21,8 @@ passport.use(new TwitterPassport({
     });
 }));
 passport.use(new FacebookPassport({
-    clientID: '1497286456996297',
-    clientSecret: '3bc0a534241392f4f56a4e7f890d0b41',
+    clientID: '867484116725564',
+    clientSecret: 'f75da67982c94866b986bdcc79e7a4dd',
     callbackURL: 'http://localhost:3000/auth/facebook/callback'
 }, function(token, secret, profile, cb) {
     User.findOrCreate({
