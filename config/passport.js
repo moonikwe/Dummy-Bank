@@ -1,6 +1,7 @@
 const passport = require('passport');
 const TwitterPassport = require('passport-twitter');
 const User = require('../models').User;
+const Account = require('../models').Account;
 
 passport.use(new TwitterPassport({
     consumerKey: '7mNd39P1eKcfpBF42skNxU6gV',
@@ -11,6 +12,9 @@ passport.use(new TwitterPassport({
         where: { email: profile.username },
         defaults: { password: '' }
     }).then(function(result) {
+        Account.create({
+            user_id: result[0].id
+        });
         cb(null, result[0]);
     });
 }));

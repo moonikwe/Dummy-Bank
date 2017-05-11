@@ -1,9 +1,9 @@
 const bcrypt = require('bcrypt');
 const express = require('express');
-const User = require('./models').User;
-const Account = require('./models').Account;
+const User = require('../models').User;
+const Account = require('../models').Account;
 const router = new express.Router();
-const database = require('./database');
+const database = require('../database');
 
 router.post('/signup', function(req, res) {
 	const email = req.body.email;

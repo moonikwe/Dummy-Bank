@@ -15,18 +15,18 @@ Tasks:
 [x]1. **Create `Account` instance on sign up**
    - Currently, when signing up only a `User` instance is created. Modify the signup workflow to also create an `Account` instance for that user after the user signs up.
    - Make sure to do them within a database transaction to make sure that all changes are discarded if either operation fails.
-1. **Implement `retrieveSignedInUser` middleware**
+[]1. **Implement `retrieveSignedInUser` middleware**
    - This middleware should add the currently signed in user's `User` instance to `req.user`.
    - Also use the middleware in parts of the existing code wherein it would add improvements in terms of removing repetitive code, etc.
-1. **Move Twitter sign in routes to `routes/twitter.js`**
+[x]1. **Move Twitter sign in routes to `routes/twitter.js`**
    - Make sure sign in with Twitter still works.
-1. **Move `auth-routes.js` to `routes/auth.js`**
+[x]1. **Move `auth-routes.js` to `routes/auth.js`**
    - Make sure authentication still works.
-1. **Add `name` field to the `User` model.**
+[]1. **Add `name` field to the `User` model.**
    - This field will contain the user's full name retrieved from Twitter sign in.
-1. **Display user's name in profile page**
+[]1. **Display user's name in profile page**
    - If the name is not available, display email instead.
-1. **Optimize the database queries in the `/transfer` route**
+[]1. **Optimize the database queries in the `/transfer` route**
    - There are four queries that could be optimized:
      - Getting the sender `User` instance
      - Getting the receiver `User` instance
