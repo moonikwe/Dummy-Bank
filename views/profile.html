@@ -3,12 +3,13 @@
     <head>
         <meta charset="utf-8">
         <title>Profile | Dummy Bank</title>
-        <link rel="stylesheet" href="/static/stylesheets/main.css">
+        <link rel="stylesheet" href="../static/stylesheets/main.css">
+          <script src = "../static/animations.js"></script>
     </head>
 
       <body>
           <p>{{ messages.statusMessage }}</p>
-          <a style = "float:right" href="/signout">Sign Out</a>
+          <a style = "float:right; text-decoration:none;" href="/signout">Sign Out</a>
           <br/><br/>
           <center><h1>Hello! {{ user.email }}</h1></center>
           <div class="tab">
