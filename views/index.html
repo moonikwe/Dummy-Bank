@@ -11,7 +11,7 @@
 
         <p>{{ messages.statusMessage }}</p>
 
-        <form action="/signup" method="post">
+        <form align = "center" action="/signup" method="post">
             <h2>Sign Up</h2>
             <h3>{{ messages.signUpMessage }}</h3>
 
@@ -31,7 +31,7 @@
             <button>Sign Up</button>
         </form>
 
-        <form action="/signin" method="post">
+        <form align = "center" action="/signin" method="post">
             <h2>Sign In</h2>
             <h3>{{ messages.signInMessage }}</h3>
 
@@ -43,13 +43,15 @@
                 <label for="password">Password</label>
                 <input type="password" name="password" id="password">
             </div>
+            <br/> <br/>
 
             <button>Sign In</button>
             <label class="remember-me">
                 <input type="checkbox" name="remember" value="yes">
                 Remember me?
             </label>
-            <a href="/auth/twitter">Sign In with Twitter</a>
+            <br/> <br/>
+            <a style = "text-decoration: none;"href="/auth/twitter">Sign In with Twitter</a>
         </form>
     </body>
 </html>
