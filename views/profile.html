@@ -6,41 +6,52 @@
         <link rel="stylesheet" href="/static/stylesheets/main.css">
     </head>
 
-    <body>
-        <p>{{ messages.statusMessage }}</p>
+      <body>
+          <p>{{ messages.statusMessage }}</p>
+          <a style = "float:right" href="/signout">Sign Out</a>
+          <br/><br/>
+          <center><h1>Hello! {{ user.email }}</h1></center>
+          <div class="tab">
+    <center><button class="tablinks" onclick="openTab(event, 'Transfer')"><img src="..\static\images\transfer.png" alt=""><br/>Transfer</button>
+    <button class="tablinks" onclick="openTab(event, 'Withdraw')"><img src="..\static\images\withdraw.png" alt=""><br/>Withdraw</button>
+    <button class="tablinks" onclick="openTab(event, 'Deposit')"><img src="..\static\images\deposit.png" alt=""><br/>Deposit</button></center>
+  </div>
 
-        <h1>{{ user.email }}</h1>
-        <a href="/signout">Sign Out</a>
-        <section>
-          <form action="/transfer" method="post">
-      			<div>
-      				<label for="recipient">Transfer To</label>
-      				<input type="text" name="recipient" id="recipient">
-      			</div>
+  <div id="Transfer" class="tabcontent">
+    <center><form action="/transfer" method="post">
+    <div>
+      <label for="recipient">Transfer To</label>
+      <input type="text" name="recipient" id="recipient">
+    </div>
+    <div>
+      <label for="amount">Transfer Amount</label>
+      <input type="number" name="amount" id="amount">
+    </div>
+      </form>
+        <button class = "buttons" id = "transfer_button">Transfer</button>
+    </center>
+  </div>
 
-      			<div>
-      				<label for="amount">Transfer Amount</label>
-      				<input type="number" name="amount" id="amount">
-      			</div>
-            <button>Transfer</button>
+  <div id="Withdraw" class="tabcontent">
+    <center><form action="/withdraw" method="post">
+        <div>
+            <label for="withdawal">Enter amount</label>
+            <input type="number" name="withdrawal" id="amount">
+        </div>
 
-          </form>
-          <form action="/deposit" method="post">
-            <div>
-              <label for="deposit">Deposit</label>
-              <input type="number" name="deposit" id="deposit">
-            </div>
-            <button>Deposit</button>
-          </form>
-          
-          <form action="/withdraw" method="post">
-            <div>
-              <label for="withdraw">Withdraw</label>
-              <input type="number" name="withdraw" id="withdraw">
-            </div>
-            <button>Withdraw</button>
-          </form>
+    </form>
+            <button class = "buttons" id = "withdraw_button">Withdraw</button></center>
+  </div>
 
-        </section>
-    </body>
+  <div id="Deposit" class="tabcontent">
+    <center><form action="/deposit" method="post">
+        <div>
+            <label for="deposit">Enter amount</label>
+            <input type="number" name="amount" id="amount">
+        </div>
+    </form>
+              <button class = "buttons" id = "deposit_button">Deposit</button></center>
+  </div>
+
+      </body>
 </html>
