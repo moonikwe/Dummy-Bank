@@ -3,13 +3,14 @@
     <head>
         <meta charset="utf-8">
         <title>Dummy Bank</title>
-        <link rel="stylesheet" href="/static/stylesheets/main.css">
+        <link rel="stylesheet" href="../static/stylesheets/main.css">
     </head>
 
     <body>
+        <br/>
         <h1 align = "center">Welcome to Dummy Bank!</h1>
 
-        <p>{{ messages.statusMessage }}</p>
+        <p align = "center" >{{ messages.statusMessage }}</p>
 
         <form align = "center" action="/signup" method="post">
             <h2>Sign Up</h2>
@@ -28,11 +29,11 @@
                 <input type="password" name="confirmation" id="confirmation">
             </div>
             <div>
-                <label for="name">Enter Full Name Here</label>
+                <label for="name">Enter Your Full Name</label>
                 <input type="text" name="name" id="name">
             </div>
-            <br/>
-            <button>Sign Up</button>
+
+            <button class = "buttons">Sign Up</button>
         </form>
 
         <form align = "center" action="/signin" method="post">
@@ -47,16 +48,17 @@
                 <label for="password">Password</label>
                 <input type="password" name="password" id="password">
             </div>
-            <br/>
-            <button>Sign In</button>
+            <br/> <br/>
+
+            <button class = "buttons" >Sign In</button>
             <label class="remember-me">
                 <input type="checkbox" name="remember" value="yes">
                 Remember me?
             </label>
             <br/> <br/>
-            <a style = "text-decoration: none;"href="/auth/twitter">Sign In with Twitter</a>
-            <br/><br/>
-            <a style = "text-decoration: none;"href="/auth/facebook">Sign In with Facebook</a>
+            <p>Sign in with:</p>
+            <a style = "text-decoration: none;"href="/auth/twitter"><img src="..\static\images\tw-img.png" alt=""></a>
+            <a style = "text-decoration: none;"href="/auth/facebook"><img src="..\static\images\fb-img.png" alt=""></a>
         </form>
     </body>
 </html>
