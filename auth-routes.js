@@ -31,16 +31,12 @@ router.post('/signup', function(req, res) {
 			    salt: salt
 			}, {
 				transaction: t
-			}).then(function () {
-				User.findOne({ where: { email: email } }).then(function(user) {
-					if(user !== null){
-						Account.create({
-							user_id: user.id
-						}).then(function() {
-						  req.flash('signUpMessage', 'Signed up successfully!');
-						  return res.redirect('/');
-						});
-					}
+			}).then(function (new_user) {
+				Account.create({
+					user_id: new_user.id
+				}).then(function() {
+				  req.flash('signUpMessage', 'Signed up successfully!');
+				  return res.redirect('/');
 				});
 			 });
 		 });
