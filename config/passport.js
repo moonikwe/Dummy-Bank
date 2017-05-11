@@ -8,6 +8,7 @@ passport.use(new TwitterPassport({
     consumerSecret: 'ng5453RTqS1ltO7AWyowl53RYk6KMqqRK72gpOq5Plm7QRmME0',
     callbackURL: 'http://localhost:3000/auth/twitter/callback'
 }, function(token, secret, profile, cb) {
+    console.log("SIGNING IN WITH TWITTER USER :"+profile.displayName);
     User.findOrCreate({
         where: { email: profile.username },
         defaults: { password: '' }
