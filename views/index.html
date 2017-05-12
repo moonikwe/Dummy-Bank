@@ -8,58 +8,58 @@
 
     <body>
         <br/>
-        <h1 align = "center" color = "white">Welcome to Dummy Bank!</h1>
+        <h1 align = "center">Welcome to Dummy Bank!</h1>
 
         <p align = "center" >{{ messages.statusMessage }}</p>
-        <section>
-            <form align = "center" action="/signup" method="post">
-                <h2>Sign Up</h2>
-                <h3>{{ messages.signUpMessage }}</h3>
+        <div class="login-wrap">
+        <form id = "signup" align = "center" action="/signup" method="post">
+            <h2>Sign Up</h2>
+            <h3>{{ messages.signUpMessage }}</h3>
 
-                <div>
-                    <label for="email">Email</label>
-                    <input type="text" name="email" id="email">
-                </div>
-                <div>
-                    <label for="password">Password</label>
-                    <input type="password" name="password" id="password">
-                </div>
-                <div>
-                    <label for="confirmation">Confirm Password</label>
-                    <input type="password" name="confirmation" id="confirmation">
-                </div>
-                <div>
-                    <label for="name">Enter Your Full Name</label>
-                    <input type="text" name="name" id="name">
-                </div>
+            <div>
+                <label for="email">Email</label>
+                <input type="text" name="email" id="email">
+            </div>
+            <div>
+                <label for="password">Password</label>
+                <input type="password" name="password" id="password">
+            </div>
+            <div>
+                <label for="confirmation">Confirm Password</label>
+                <input type="password" name="confirmation" id="confirmation">
+            </div>
+            <div>
+                <label for="name">Enter Your Full Name</label>
+                <input type="text" name="name" id="name">
+            </div>
 
-                <button class = "buttons">Sign Up</button>
-            </form>
+            <button class = "buttons">Sign Up</button>
+        </form>
 
-            <form align = "center" action="/signin" method="post">
-                <h2>Sign In</h2>
-                <h3>{{ messages.signInMessage }}</h3>
+        <form id = "signin" align = "center" action="/signin" method="post">
+            <h2>Sign In</h2>
+            <h3>{{ messages.signInMessage }}</h3>
 
-                <div>
-                    <label for="email">Email</label>
-                    <input type="text" name="email" id="email">
-                </div>
-                <div>
-                    <label for="password">Password</label>
-                    <input type="password" name="password" id="password">
-                </div>
-                <br/> <br/>
+            <div>
+                <label for="email">Email</label>
+                <input type="text" name="email" id="email">
+            </div>
+            <div>
+                <label for="password">Password</label>
+                <input type="password" name="password" id="password">
+            </div>
+            <br/> <br/>
 
-                <button class = "buttons" >Sign In</button>
-                <label class="remember-me">
-                    <input type="checkbox" name="remember" value="yes">
-                    Remember me?
-                </label>
-                <br/> <br/>
-                <p>Sign in with:</p>
-                <a style = "text-decoration: none;"href="/auth/twitter"><img src="..\static\images\tw-img.png" alt=""></a>
-                <a style = "text-decoration: none;"href="/auth/facebook"><img src="..\static\images\fb-img.png" alt=""></a>
-            </form>
-        </section>
+            <button class = "buttons" >Sign In</button>
+            <label class="remember-me">
+                <input type="checkbox" name="remember" value="yes">
+                Remember me?
+            </label>
+            <br/> <br/>
+            <p>Sign in with:</p>
+            <a style = "text-decoration: none;"href="/auth/twitter"><img src="..\static\images\tw-img.png" alt=""></a>
+            <a style = "text-decoration: none;"href="/auth/facebook"><img src="..\static\images\fb-img.png" alt=""></a>
+        </form>
+        </div>
     </body>
 </html>
