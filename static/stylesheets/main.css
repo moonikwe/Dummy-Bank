@@ -1,6 +1,45 @@
-body {
-    background: #a7c6a3;
+body{
+	margin:0;
+	color:white;
+	background:#bac0b9;
+	font:600 16px/18px 'Open Sans',sans-serif;
 }
+*,:after,:before{box-sizing:border-box}
+.clearfix:after,.clearfix:before{content:'';display:table}
+.clearfix:after{clear:both;display:block}
+a{color:inherit;text-decoration:none}
+a img{
+  width: 45px;
+  height: 45px;
+  padding: 10px;
+}
+input{
+border:none;
+padding:15px 20px;
+border-radius:25px;
+background:white;
+
+}
+.login-wrap{
+	width:100%;
+	margin:auto;
+	max-width:525px;
+	min-height:670px;
+	position:relative;
+  background:#83ac42;
+
+	box-shadow:0 12px 15px 0 rgba(0,0,0,.24),0 17px 50px 0 rgba(0,0,0,.19);
+}
+.login-wrap label, p, h2, h3{
+	color:white;
+	font-size:14px;
+}
+.login-wrap .button{
+	background:#1161ee;
+}
+
+
+
 /*tab design*/
 /* Style the tab */
 div.tab {
@@ -20,7 +59,14 @@ div.tab button {
     font-size: 17px;
     color: white;
 }
+button {
+  border:none;
+	padding:15px 20px;
+	border-radius:25px;
+  color: white;
 
+
+}
 /* Change background color of buttons on hover */
 div.tab button:hover {
     background-color: #385a03;
@@ -29,6 +75,7 @@ div.tab img {
   width: 20px;
   height: 20px;
 }
+
 
 /* Create an active/current tablink class */
 div.tab button.active {
@@ -84,5 +131,4 @@ button.buttons{
 }
 h1, h2, h3, p, label {
     color: #343331;
-    font-weight: bold;
 }
