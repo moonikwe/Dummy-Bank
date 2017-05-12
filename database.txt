@@ -1,0 +1,5 @@
+drop table accounts;
+drop table users;
+
+select * from users;
+select * from accounts;
