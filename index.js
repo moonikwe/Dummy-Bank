@@ -30,6 +30,12 @@ app.get('/', function(req, res) {
 	res.render('index.html');
 });
 
+var user = function  retrieveSignedInUser(req, res, next){
+	req.user = req.session.currentUser;
+	next();
+}
+app.use(user);
+
 app.get('/profile', requireSignedIn, function(req, res) {
 	const email = req.session.currentUser;
 	User.findOne({ where: { email: email } }).then(function(user) {
@@ -42,62 +48,102 @@ app.get('/profile', requireSignedIn, function(req, res) {
 app.post('/transfer', requireSignedIn, function(req, res) {
 	const recipient = req.body.recipient;
 	const amount = parseInt(req.body.amount, 10);
+	const email = req.user;
 
-	const email = req.session.currentUser;
-	User.findOne({ where: { email: email } }).then(function(sender) {
-		User.findOne({ where: { email: recipient } }).then(function(receiver) {
-			Account.findOne({ where: { user_id: sender.id } }).then(function(senderAccount) {
-				Account.findOne({ where: { user_id: receiver.id } }).then(function(receiverAccount) {
-					database.transaction(function(t) {
-						return senderAccount.update({
-							balance: senderAccount.balance - amount
-						}, { transaction: t }).then(function() {
-							return receiverAccount.update({
-								balance: receiverAccount.balance + amount
-							}, { transaction: t });
-						});
-					}).then(function() {
-						req.flash('statusMessage', 'Transferred ' + amount + ' to ' + recipient);
-						res.redirect('/profile');
+	const q1 = "SELECT * FROM accounts WHERE user_id IN (SELECT id FROM users WHERE email= '" + email + "')";
+	const q2 = "SELECT * FROM accounts WHERE user_id IN (SELECT id FROM users WHERE email= '" + recipient + "')";
+	if(amount <= 0){
+		req.flash('transferStatus', 'Amount must be greater than zero!');
+		res.redirect('/profile');
+	}
+	else{
+		database.query(q1, { model: Account }).then(function(sender){
+			var jsonString = JSON.stringify(sender[0]);
+			var senderObj = JSON.parse(jsonString);
+			var senderBal = parseInt(senderObj.balance, 10);
+			var senderId = parseInt(senderObj.id,10);
+
+			console.log("SENDER >> "+senderId);
+			console.log("sender is "+sender.constructor.name);
+			console.log("Send = "+senderBal);
+	  		database.query(q2, { model: Account }).then(function(receiver){
+	  			var jString = JSON.stringify(receiver[0]);
+				var receiverObj = JSON.parse(jString);
+				var receiverBal = parseInt(receiverObj.balance, 10);
+				var receiverId = parseInt(receiverObj.id, 10);
+				console.log("Sendddd = "+receiverBal);
+				console.log("receiverId = "+receiverId);
+	  			database.transaction(function(t) {
+					return Account.update({
+						balance: senderBal - amount
+					},{where:{ user_id: senderId}}, 
+						{ transaction: t }).then(function() {
+						return Account.update({
+							balance: receiverBal + amount
+						},{where: { user_id: receiverId }}, { transaction: t });
 					});
+				}).then(function() {
+					req.flash('statusMessage', 'Transferred ' + amount + ' to ' + recipient);
+					res.redirect('/profile');
 				});
 			});
 		});
-	});
+	}
 });
 app.post('/deposit', requireSignedIn, function(req, res){
-	const deposit = parseInt(req.body.deposit, 10);
-	const email = req.session.currentUser;
-	User.findOne({where: {email: email}}).then(function(owner){
-		Account.findOne({where: {user_id: owner.id}}).then(function(ownerAccount){
-			database.transaction(function(t){
-				return ownerAccount.update({
-					balance: ownerAccount.balance + deposit
-				}, { transaction: t });
-			}).then(function() {
-				req.flash('statusMessage', 'Deposit successful ');
-				res.redirect('/profile');
+	const deposit = parseInt(req.body.amount, 10);
+	const email = req.user;
+	if(deposit <= 0){
+		req.flash('depositStatus', 'Amount must be greater than zero!');
+		res.redirect('/profile');
+	}
+	else{
+		User.findOne({where: {email: email}}).then(function(owner){
+			Account.findOne({where: {user_id: owner.id}}).then(function(ownerAccount){
+				database.transaction(function(t){
+					return ownerAccount.update({
+						balance: ownerAccount.balance + deposit
+					}, { transaction: t });
+				}).then(function() {
+					req.flash('depositStatus', 'Deposit successful ');
+					res.redirect('/profile');
+				});
 			});
 		});
-	});
+	}
 
 });
 app.post('/withdraw', requireSignedIn, function(req, res){
-	const withdraw = parseInt(req.body.withdraw, 10);
+	const withdraw = parseInt(req.body.withdrawal, 10);
 	const email = req.session.currentUser;
+	console.log("Withdraw = "+withdraw+ "W/O Parsing: "+ req.body.withdrawal);
+
 	User.findOne({where: {email: email}}).then(function(owner){
 		Account.findOne({where: {user_id: owner.id}}).then(function(ownerAccount){
-			database.transaction(function(t){
-				if(ownerAccount.balance >= withdraw){
-					return ownerAccount.update({
-						balance: ownerAccount.balance - withdraw
-					}, { transaction: t });
-				}
-			}).then(function(){
-				req.flash('statusMessage', 'Withdraw successful');
+
+			if(withdraw > ownerAccount.balance){
+					req.flash('withdrawStatus', 'Insufficient Balance');
+					res.redirect('/profile');
+			}
+			else if(withdraw <= 0){
+				req.flash('withdrawStatus', 'Amount must be greater than zero!');
 				res.redirect('/profile');
-			});
+			}
+			else{
+				database.transaction(function(t){
+					// console.log("USER's BALANCE = "+ownerAccount.balance+" Withdraw = "+withdraw);
+					if(ownerAccount.balance >= withdraw){
+						return ownerAccount.update({
+							balance: ownerAccount.balance - withdraw
+						}, { transaction: t });
+					}
+				}).then(function(){
+					req.flash('withdrawStatus', 'Withdraw successful');
+					res.redirect('/profile');
+				});
+			}
 		});
+
 	});
 });
 

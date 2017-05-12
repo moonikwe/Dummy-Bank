@@ -8,30 +8,34 @@
     </head>
 
       <body>
-          <p>{{ messages.statusMessage }}</p>
+          <p align = center>{{ messages.statusMessage }}</p>
           <a style = "float:right; text-decoration:none;" href="/signout">Sign Out</a>
           <br/><br/>
-          <center><h1>Hello! {{ user.email }}</h1></center>
+          <center><h1>Hello! {{ user.name }}</h1></center>
           <div class="tab">
-    <center><button class="tablinks" onclick="openTab(event, 'Transfer')"><img src="..\static\images\transfer.png" alt=""><br/>Transfer</button>
-    <button class="tablinks" onclick="openTab(event, 'Withdraw')"><img src="..\static\images\withdraw.png" alt=""><br/>Withdraw</button>
-    <button class="tablinks" onclick="openTab(event, 'Deposit')"><img src="..\static\images\deposit.png" alt=""><br/>Deposit</button></center>
+    <center>
+        <button id="defaultOpen" class="tablinks" onclick="openTab(event, 'Transfer')"><img src="..\static\images\transfer.png" alt="">   <br/>Transfer</button>
+        <button class="tablinks" onclick="openTab(event, 'Withdraw')"><img src="..\static\images\withdraw.png" alt=""><br/>Withdraw</button>
+        <button class="tablinks" onclick="openTab(event, 'Deposit')"><img src="..\static\images\deposit.png" alt=""><br/>Deposit</button>
+    </center>
   </div>
 
   <div id="Transfer" class="tabcontent">
-    <center><form action="/transfer" method="post">
-    <div>
-      <label for="recipient">Transfer To</label>
-      <input type="text" name="recipient" id="recipient">
-    </div>
-    <div>
-      <label for="amount">Transfer Amount</label>
-      <input type="number" name="amount" id="amount">
-    </div>
-      </form>
-        <button class = "buttons" id = "transfer_button">Transfer</button>
-    </center>
+      <center><form action="/transfer" method="post">
+          <div>
+             <label for="recipient">Transfer To</label>
+             <input type="text" name="recipient">
+          </div>
+          <div>
+             <label for="amount">Transfer Amount</label>
+             <input type="number" name="amount" id="amount">
+          </div>
+              <button class = "buttons" id = "transfer_button">Transfer</button>
+        </form>
+
+      </center>
   </div>
+  <h3 align = center>{{ messages.transferStatus }}</h3>
 
   <div id="Withdraw" class="tabcontent">
     <center><form action="/withdraw" method="post">
@@ -39,20 +43,26 @@
             <label for="withdawal">Enter amount</label>
             <input type="number" name="withdrawal" id="amount">
         </div>
-
+        <button class = "buttons" id = "withdraw_button">Withdraw</button>
     </form>
-            <button class = "buttons" id = "withdraw_button">Withdraw</button></center>
+    </center>
   </div>
 
+  <h3 align = center>{{ messages.withdrawStatus }}</h3>
+
   <div id="Deposit" class="tabcontent">
-    <center><form action="/deposit" method="post">
+    <center>
+    <form action="/deposit" method="post">
         <div>
             <label for="deposit">Enter amount</label>
             <input type="number" name="amount" id="amount">
         </div>
+         <button class = "buttons" id = "deposit_button">Deposit</button></center>s
     </form>
-              <button class = "buttons" id = "deposit_button">Deposit</button></center>
+    </center>         
   </div>
+
+  <h3 align = center>{{ messages.depositStatus }}</h3>
 
       </body>
 </html>
