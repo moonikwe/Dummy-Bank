@@ -1,6 +1,6 @@
 # Lab Exercise 4: Improving the Dummy Bank
 
-(members: Cedz Ming  Moo )
+(members: moonikwe peachlocket sedce )
 
 There are several things in the **Dummy Bank** application which can be improved. Your goal is to complete the following checklist of tasks that need to be implemented/fixed/refactored.
 
@@ -39,7 +39,7 @@ Tasks:
 
 Bonus Tasks:
 
-- [ ] Make the dummy bank pages look good.
+- [x] Make the dummy bank pages look good.
 - [x] Implement another social authentication besides Twitter
   - You can do signin with Google, Facebook, Github, etc.
 
